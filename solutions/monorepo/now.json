@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "name": "ooo-serverless-monorepo",
+  "scope": "oaks",
+  "routes": [
+    { "src": "/", "dest": "/frontend/index" },
+    { "src": "/nuxtjs", "dest": "/frontend/nuxtjs" },
+    { "src": "/api", "dest": "/nodejs-api" }
+  ],
+  "builds": [
+    { "src": "frontend/package.json", "use": "@now/next" },
+    { "src": "nodejs-api/index.js", "use": "@now/node" }
+  ]
+}

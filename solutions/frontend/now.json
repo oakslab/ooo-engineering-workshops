@@ -1,0 +1,6 @@
+{
+  "version": 2,
+  "name": "ooo-serverless-nextjs",
+  "scope": "oaks",
+  "builds": [{ "src": "package.json", "use": "@now/next" }]
+}
