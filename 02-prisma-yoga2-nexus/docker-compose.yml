@@ -1,0 +1,40 @@
+version: "3"
+services:
+  prisma:
+    image: prismagraphql/prisma:1.33
+    container_name: ooo_workshop_prisma
+    networks:
+      - ooo-workshop-network
+    restart: always
+    ports:
+      - "4466:4466"
+    environment:
+      PRISMA_CONFIG: |
+        port: 4466
+        # uncomment the next line and provide the env var PRISMA_MANAGEMENT_API_SECRET=my-secret to activate cluster security
+        # managementApiSecret: my-secret
+        databases:
+          default:
+            connector: postgres
+            host: postgres
+            user: prisma
+            password: prisma
+            port: 5432
+  postgres:
+    image: postgres
+    container_name: ooo_workshop_db
+    networks:
+      - ooo-workshop-network
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: prisma
+      POSTGRES_PASSWORD: prisma
+    volumes:
+      - postgres:/var/lib/postgresql/data
+volumes:
+  postgres:
+
+networks:
+  ooo-workshop-network:

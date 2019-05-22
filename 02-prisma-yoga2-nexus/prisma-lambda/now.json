@@ -1,0 +1,28 @@
+{
+  "version": 2,
+  "name": "prisma-lambda",
+  "builds": [
+    { "src": "users/index.ts", "use": "@now/node" },
+    { "src": "user/index.ts", "use": "@now/node" },
+    { "src": "createUser/index.ts", "use": "@now/node" },
+    { "src": "deleteUser/index.ts", "use": "@now/node" }
+  ],
+  "routes": [
+    { "src": "/users", "methods": ["GET"], "dest": "users/index.ts" },
+    {
+      "src": "/users",
+      "methods": ["POST"],
+      "dest": "createUser/index.ts"
+    },
+    {
+      "src": "/users/(?<id>[^/]*)",
+      "methods": ["GET"],
+      "dest": "user/index.ts?id=$id"
+    },
+    {
+      "src": "/users/(?<id>[^/]*)",
+      "methods": ["DELETE"],
+      "dest": "deleteUser/index.ts?id=$id"
+    }
+  ]
+}
